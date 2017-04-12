@@ -1,5 +1,5 @@
 # Bluetooth DOS
 
-Reinicia algunos dispositivos android, aun en fase muy muy temprana
+A fork of a tool made for crashing Android devices, but also has been tested to work on iPhone (promp loop)
 
-uso: python blue_crash.py mac_del_dispositivo hilos(recomendado 30)
+usage: `python blue_crash.py mac_of_device threads(30 recommended)`
